@@ -2,28 +2,28 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+This **shit** _go_ ~~crazy~~.
 
 [Link to another page](./another-page.html).
 
+There is space between paragraphs?
+
 There should be whitespace between paragraphs.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+# joe
 
-# Header 1
+mama. This is a paragraph? pogchamp
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+## quptes
 
-## Header 2
-
-> This is a blockquote following a header.
+> quote.
 >
-> When something is important enough, you do it even if the odds are not in your favor.
+> When something is important enough, joe will commit die.
 
 ### Header 3
 
 ```js
-// Javascript code with syntax highlighting.
+// Javascript moments
 var fun = function lang(l) {
   dateformat.i18n = require('./lang/' + l)
   return true;
@@ -31,7 +31,7 @@ var fun = function lang(l) {
 ```
 
 ```ruby
-# Ruby code with syntax highlighting
+# Ruby moments
 GitHubPages::Dependencies.gems.each do |gem, version|
   s.add_dependency(gem, "= #{version}")
 end
@@ -39,15 +39,15 @@ end
 
 #### Header 4
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
+*   This is a list.
+*   cool.
+*   epic!
 
 ##### Header 5
 
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
+1.  numbers
+2.  numbers
+3.  numbers
 
 ###### Header 6
 
