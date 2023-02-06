@@ -1,17 +1,4 @@
-const mineField = [
-    [0, 0, 0, 0, 1],
-    [0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]
-  ];
-  
-  let timer = 0;
-  let gameOver = false;
-  let flaggedCount = 0;
-  let mineCount = 0;
-  
-  window.addEventListener("load", function() {
+window.addEventListener("load", function() {
     const table = document.querySelector("#board");
     if (!table) {
       return;
@@ -24,8 +11,20 @@ const mineField = [
     if (!timerDisplay) {
       return;
     }
-  });
-  
+    
+    const mineField = [
+        [0, 0, 0, 0, 1],
+        [0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
+      ];
+      
+      let timer = 0;
+      let gameOver = false;
+      let flaggedCount = 0;
+      let mineCount = 0;
+        
   for (let i = 0; i < mineField.length; i++) {
     for (let j = 0; j < mineField[i].length; j++) {
       if (mineField[i][j] === 1) {
@@ -124,3 +123,4 @@ const mineField = [
       }
     }
   }
+});
