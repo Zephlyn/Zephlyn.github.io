@@ -1,6 +1,8 @@
 const mineField = [];
 let mineCount = 0;
 let flaggedCount = 0;
+let timer = 0;
+let gameOver = false;
 
 function generateMineField(rows, cols, mines) {
   mineCount = mines;
@@ -17,7 +19,30 @@ function generateMineField(rows, cols, mines) {
       mineField[row][col] = 1;
       mines--;
     }
+  } 
+  
+  for (let k = 0; k < mineField.length; k++) {
+    const tr = document.createElement("tr");
+    for (let l = 0; l < mineField[k].length; l++) {
+      const td = document.createElement("td");
+      td.style.border = "1px solid black";
+      td.style.width = "25px";
+      td.style.height = "25px";
+      td.setAttribute("data-row", k);
+      td.setAttribute("data-col", l);
+      td.addEventListener("click", handleClick);
+      td.addEventListener("contextmenu", handleRightClick);
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
   }
+  
+  setInterval(function() {
+    if (!gameOver) {
+      timer++;
+      timerDisplay.innerHTML = timer;
+    }
+  }, 1000);
 }
 
 window.addEventListener("load", function() {
@@ -33,45 +58,10 @@ window.addEventListener("load", function() {
     if (!timerDisplay) {
       return;
     }
-      
-    let timer = 0;
-    let gameOver = false;
-    let flaggedCount = 0;
-        
-  for (let i = 0; i < mineField.length; i++) {
-    for (let j = 0; j < mineField[i].length; j++) {
-      if (mineField[i][j] === 1) {
-        mineCount++;
-      }
-    }
-  }    
-  
-  for (let row = 0; row < mineField.length; row++) {
-    const tr = document.createElement("tr");
-    for (let col = 0; col < mineField[row].length; col++) {
-      const td = document.createElement("td");
-      td.style.border = "1px solid black";
-      td.style.width = "25px";
-      td.style.height = "25px";
-      td.setAttribute("data-row", row);
-      td.setAttribute("data-col", col);
-      td.addEventListener("click", handleClick);
-      td.addEventListener("contextmenu", handleRightClick);
-      tr.appendChild(td);
-    }
-    table.appendChild(tr);
-  }
-  
+
   restartButton.addEventListener("click", function() {
     location.reload();
   });
-  
-  setInterval(function() {
-    if (!gameOver) {
-      timer++;
-      timerDisplay.innerHTML = timer;
-    }
-  }, 1000);
   
   function handleClick() {
     if (gameOver || this.classList.contains("flagged")) {
