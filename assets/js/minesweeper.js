@@ -31,11 +31,11 @@ window.addEventListener("load", function() {
         mineCount++;
       }
     }
-  }
+  }    
   
-  for (let row = 0; i < row; i++) {
+  for (let row = 0; row < mineField.length; row++) {
     const tr = document.createElement("tr");
-    for (let col = 0; j < col; j++) {
+    for (let col = 0; col < mineField[row].length; col++) {
       const td = document.createElement("td");
       td.style.border = "1px solid black";
       td.style.width = "25px";
