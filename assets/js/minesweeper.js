@@ -6,13 +6,25 @@ const mineField = [
     [0, 0, 0, 0, 0]
   ];
   
-  const table = document.querySelector("#board");
-  const restartButton = document.querySelector("#restart");
-  const timerDisplay = document.querySelector("#timer");
   let timer = 0;
   let gameOver = false;
   let flaggedCount = 0;
   let mineCount = 0;
+  
+  window.addEventListener("load", function() {
+    const table = document.querySelector("#board");
+    if (!table) {
+      return;
+    }
+    const restartButton = document.querySelector("#restart");
+    if (!restartButton) {
+      return;
+    }
+    const timerDisplay = document.querySelector("#timer");
+    if (!timerDisplay) {
+      return;
+    }
+  });
   
   for (let i = 0; i < mineField.length; i++) {
     for (let j = 0; j < mineField[i].length; j++) {
