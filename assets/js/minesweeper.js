@@ -33,12 +33,15 @@ window.addEventListener("load", function() {
     }
   }
   
-  for (let row = 0; row < mineField.length; row++) {
+  for (let i = 0; i < rows; i++) {
     const tr = document.createElement("tr");
-    for (let col = 0; col < mineField[row].length; col++) {
+    for (let j = 0; j < cols; j++) {
       const td = document.createElement("td");
-      td.setAttribute("data-row", row);
-      td.setAttribute("data-col", col);
+      td.style.border = "1px solid black";
+      td.style.width = "25px";
+      td.style.height = "25px";
+      td.setAttribute("data-row", i);
+      td.setAttribute("data-col", j);
       td.addEventListener("click", handleClick);
       td.addEventListener("contextmenu", handleRightClick);
       tr.appendChild(td);
