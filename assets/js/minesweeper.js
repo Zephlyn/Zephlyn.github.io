@@ -33,15 +33,15 @@ window.addEventListener("load", function() {
     }
   }
   
-  for (let i = 0; i < rows; i++) {
+  for (let row = 0; i < row; i++) {
     const tr = document.createElement("tr");
-    for (let j = 0; j < cols; j++) {
+    for (let col = 0; j < col; j++) {
       const td = document.createElement("td");
       td.style.border = "1px solid black";
       td.style.width = "25px";
       td.style.height = "25px";
-      td.setAttribute("data-row", i);
-      td.setAttribute("data-col", j);
+      td.setAttribute("data-row", row);
+      td.setAttribute("data-col", col);
       td.addEventListener("click", handleClick);
       td.addEventListener("contextmenu", handleRightClick);
       tr.appendChild(td);
