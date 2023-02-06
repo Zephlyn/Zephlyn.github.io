@@ -1,9 +1,4 @@
 window.addEventListener("load", function() {
-    const table = document.querySelector("#board");
-    if (!table) {
-      return;
-    }
-    
     const restartButton = document.querySelector("#restart");
     if (!restartButton) {
       return;
@@ -124,7 +119,7 @@ function generateMineField(rows, cols, mines) {
       td.addEventListener("contextmenu", handleRightClick);
       tr.appendChild(td);
     }
-    table.appendChild(tr);
+    document.querySelector("#board").appendChild(tr);
   }
   
   setInterval(function() {
