@@ -1,3 +1,24 @@
+window.addEventListener("load", function() {
+    const table = document.querySelector("#board");
+    if (!table) {
+      return;
+    }
+    
+    const restartButton = document.querySelector("#restart");
+    if (!restartButton) {
+      return;
+    }
+
+    const timerDisplay = document.querySelector("#timer");
+    if (!timerDisplay) {
+      return;
+    }
+
+    restartButton.addEventListener("click", function() {
+      location.reload();
+    });
+});
+
 const mineField = [];
 let mineCount = 0;
 let flaggedCount = 0;
@@ -114,23 +135,3 @@ function generateMineField(rows, cols, mines) {
   }, 1000);
 }
 
-window.addEventListener("load", function() {
-    const table = document.querySelector("#board");
-    if (!table) {
-      return;
-    }
-    
-    const restartButton = document.querySelector("#restart");
-    if (!restartButton) {
-      return;
-    }
-
-    const timerDisplay = document.querySelector("#timer");
-    if (!timerDisplay) {
-      return;
-    }
-
-    restartButton.addEventListener("click", function() {
-      location.reload();
-    });
-});
