@@ -1,3 +1,25 @@
+const mineField = [];
+let mineCount = 0;
+let flaggedCount = 0;
+
+function generateMineField(rows, cols, mines) {
+  mineCount = mines;
+  for (let i = 0; i < rows; i++) {
+    mineField[i] = [];
+    for (let j = 0; j < cols; j++) {
+      mineField[i][j] = 0;
+    }
+  }
+  while (mines > 0) {
+    const row = Math.floor(Math.random() * rows);
+    const col = Math.floor(Math.random() * cols);
+    if (mineField[row][col] === 0) {
+      mineField[row][col] = 1;
+      mines--;
+    }
+  }
+}
+
 window.addEventListener("load", function() {
     const table = document.querySelector("#board");
     if (!table) {
@@ -11,19 +33,10 @@ window.addEventListener("load", function() {
     if (!timerDisplay) {
       return;
     }
-    
-    const mineField = [
-        [0, 0, 0, 0, 1],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
-      ];
       
-      let timer = 0;
-      let gameOver = false;
-      let flaggedCount = 0;
-      let mineCount = 0;
+    let timer = 0;
+    let gameOver = false;
+    let flaggedCount = 0;
         
   for (let i = 0; i < mineField.length; i++) {
     for (let j = 0; j < mineField[i].length; j++) {
@@ -101,12 +114,14 @@ window.addEventListener("load", function() {
     }
     if (!this.classList.contains("flagged")) {
       this.classList.add("flagged");
+      this.innerHTML = "&#9873;";
       flaggedCount++;
       if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
         mineCount--;
       }
     } else {
       this.classList.remove("flagged");
+      this.innerHTML = "";
       flaggedCount--;
       if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
         mineCount++;
