@@ -4,66 +4,7 @@ let flaggedCount = 0;
 let timer = 0;
 let gameOver = false;
 
-function generateMineField(rows, cols, mines) {
-  mineCount = mines;
-  for (let i = 0; i < rows; i++) {
-    mineField[i] = [];
-    for (let j = 0; j < cols; j++) {
-      mineField[i][j] = 0;
-    }
-  }
-  while (mines > 0) {
-    const row = Math.floor(Math.random() * rows);
-    const col = Math.floor(Math.random() * cols);
-    if (mineField[row][col] === 0) {
-      mineField[row][col] = 1;
-      mines--;
-    }
-  } 
-  
-  for (let k = 0; k < mineField.length; k++) {
-    const tr = document.createElement("tr");
-    for (let l = 0; l < mineField[k].length; l++) {
-      const td = document.createElement("td");
-      td.style.border = "1px solid black";
-      td.style.width = "25px";
-      td.style.height = "25px";
-      td.setAttribute("data-row", k);
-      td.setAttribute("data-col", l);
-      td.addEventListener("click", handleClick);
-      td.addEventListener("contextmenu", handleRightClick);
-      tr.appendChild(td);
-    }
-    table.appendChild(tr);
-  }
-  
-  setInterval(function() {
-    if (!gameOver) {
-      timer++;
-      timerDisplay.innerHTML = timer;
-    }
-  }, 1000);
-}
-
-window.addEventListener("load", function() {
-    const table = document.querySelector("#board");
-    if (!table) {
-      return;
-    }
-    const restartButton = document.querySelector("#restart");
-    if (!restartButton) {
-      return;
-    }
-    const timerDisplay = document.querySelector("#timer");
-    if (!timerDisplay) {
-      return;
-    }
-
-  restartButton.addEventListener("click", function() {
-    location.reload();
-  });
-  
-  function handleClick() {
+function handleClick() {
     if (gameOver || this.classList.contains("flagged")) {
       return;
     }
@@ -131,4 +72,65 @@ window.addEventListener("load", function() {
       }
     }
   }
+
+function generateMineField(rows, cols, mines) {
+  mineCount = mines;
+  for (let i = 0; i < rows; i++) {
+    mineField[i] = [];
+    for (let j = 0; j < cols; j++) {
+      mineField[i][j] = 0;
+    }
+  }
+  while (mines > 0) {
+    const row = Math.floor(Math.random() * rows);
+    const col = Math.floor(Math.random() * cols);
+    if (mineField[row][col] === 0) {
+      mineField[row][col] = 1;
+      mines--;
+    }
+  } 
+  
+  for (let k = 0; k < mineField.length; k++) {
+    const tr = document.createElement("tr");
+    for (let l = 0; l < mineField[k].length; l++) {
+      const td = document.createElement("td");
+      td.style.border = "1px solid black";
+      td.style.width = "25px";
+      td.style.height = "25px";
+      td.setAttribute("data-row", k);
+      td.setAttribute("data-col", l);
+      td.addEventListener("click", handleClick);
+      td.addEventListener("contextmenu", handleRightClick);
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+  
+  setInterval(function() {
+    if (!gameOver) {
+      timer++;
+      timerDisplay.innerHTML = timer;
+    }
+  }, 1000);
+}
+
+window.addEventListener("load", function() {
+    const table = document.querySelector("#board");
+    if (!table) {
+      return;
+    }
+    
+    const restartButton = document.querySelector("#restart");
+    if (!restartButton) {
+      return;
+    }
+
+    const timerDisplay = document.querySelector("#timer");
+    if (!timerDisplay) {
+      return;
+    }
+
+    restartButton.addEventListener("click", function() {
+      location.reload();
+    });
 });
