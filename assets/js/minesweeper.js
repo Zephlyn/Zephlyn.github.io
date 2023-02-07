@@ -39,6 +39,10 @@ function spreadEmpty(row, col) {
 
 function handleClick(event) {
   if (event.button === 0) {
+    if (gameOver || this.classList.contains("flagged")) {
+      return;
+    }
+
     if (firstClick) {
       firstClick = false;
       let row = event.srcElement.parentElement.rowIndex;
@@ -46,12 +50,32 @@ function handleClick(event) {
       spreadEmpty(row, col);
     } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
       spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
-    } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] > 0) {
-      event.srcElement.innerHTML = mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex];
-      event.srcElement.style.backgroundColor = colors[mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex]];
-    } else {
+    } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 1) {
+      gameOver = true;
+      this.innerHTML = "X";    
+      this.classList.add("mined");
+      showAllMines();
+      alert("Game Over!");      
       event.srcElement.innerHTML = "X";
       event.srcElement.style.backgroundColor = colors[1];
+    } else {
+        let _mines = 0;
+        for (let i = -1; i <= 1; i++) {
+          for (let j = -1; j <= 1; j++) {
+            if (
+              row + i >= 0 &&
+              row + i < mineField.length &&
+              col + j >= 0 &&
+              col + j < mineField[row].length
+            ) {
+              if (mineField[row + i][col + j] === 1) {
+                _mines++;
+              }
+            }
+          }
+        }
+        event.srcElement.innerHTML = _mines;
+        event.srcElement.style.backgroundColor = colors[_mines];
     }
   }
 }
