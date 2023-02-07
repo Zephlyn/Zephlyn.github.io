@@ -1,95 +1,108 @@
-window.addEventListener("load", function() {
-    const restartButton = document.querySelector("#restart");
-    if (!restartButton) {
-      return;
-    }
+window.addEventListener("load", function () {
+  const restartButton = document.querySelector("#restart");
+  if (!restartButton) {
+    return;
+  }
 
-    const timerDisplay = document.querySelector("#timer");
-    if (!timerDisplay) {
-      return;
-    }
+  const timerDisplay = document.querySelector("#timer");
+  if (!timerDisplay) {
+    return;
+  }
 
-    restartButton.addEventListener("click", function() {
-      location.reload();
-    });
+  restartButton.addEventListener("click", function () {
+    location.reload();
+  });
 });
 
 const mineField = [];
+const colors = ["white", "red", "#FFA500", "green", "blue", "purple", "black", "gray"];
 let mineCount = 0;
 let flaggedCount = 0;
 let timer = 0;
 let gameOver = false;
+let firstClick = true;
 
-function handleClick() {
-    if (gameOver || this.classList.contains("flagged")) {
-      return;
+function spreadEmpty(row, col) {
+  if (row < 0 || row >= length || col < 0 || col >= width) {
+    return;
+  }
+  if (table.rows[row + 1].cells[col].innerHTML !== "") {
+    return;
+  }
+  table.rows[row + 1].cells[col].style.backgroundColor = colors[0];
+  if (mineField[row][col] === 0) {
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        spreadEmpty(row + i, col + j);
+      }
     }
-    const row = parseInt(this.getAttribute("data-row"));
-    const col = parseInt(this.getAttribute("data-col"));
-    if (mineField[row][col] === 1) {
-      gameOver = true;
-      this.innerHTML = "X";    
-      this.classList.add("mined");
-      showAllMines();
-      alert("Game Over!");
+  } else {
+    table.rows[row + 1].cells[col].innerHTML = mineField[row][col];
+    table.rows[row + 1].cells[col].style.backgroundColor = colors[mineField[row][col]];
+  }
+}
+
+function handleClick(event) {
+  if (event.button === 0) {
+    if (firstClick) {
+      firstClick = false;
+      let row = event.srcElement.parentElement.rowIndex - 1;
+      let col = event.srcElement.cellIndex;
+      while (mineField[row][col] === 0) {
+        generateMineField(length, width, mines);
+      }
+      spreadEmpty(row, col);
+    } else if (mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex] === 0) {
+      spreadEmpty(event.srcElement.parentElement.rowIndex - 1, event.srcElement.cellIndex);
+    } else if (mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex] > 0) {
+      event.srcElement.innerHTML = mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex];
+      event.srcElement.style.backgroundColor = colors[mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex]];
     } else {
-      let mines = 0;
-      for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-          if (
-            row + i >= 0 &&
-            row + i < mineField.length &&
-            col + j >= 0 &&
-            col + j < mineField[row].length
-          ) {
-            if (mineField[row + i][col + j] === 1) {
-              mines++;
-            }
-          }
-        }
-      }
-      this.innerHTML = mines === 0 ? "" : mines;
-      this.style.backgroundColor = "lightgrey";
-      this.style.pointerEvents = "none";
+      event.srcElement.innerHTML = "X";
+      event.srcElement.style.backgroundColor = colors[1];
     }
   }
-  
-  function handleRightClick(event) {
-    event.preventDefault();
-    if (gameOver) {
-      return;
+}
+
+function handleRightClick(event) {
+  event.preventDefault();
+  if (gameOver) {
+    return;
+  }
+  if (!this.classList.contains("flagged")) {
+    this.classList.add("flagged");
+    this.innerHTML = "&#9873;";
+    flaggedCount++;
+    if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
+      mineCount--;
     }
-    if (!this.classList.contains("flagged")) {
-      this.classList.add("flagged");
-      this.innerHTML = "&#9873;";
-      flaggedCount++;
-      if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
-        mineCount--;
-      }
-    } else {
-      this.classList.remove("flagged");
-      this.innerHTML = "";
-      flaggedCount--;
-      if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
-        mineCount++;
-      }
-    }
-    if (mineCount === 0 && flaggedCount === mineField.length * mineField[0].length) {
-      gameOver = true;
-      alert("You win!");
+  } else {
+    this.classList.remove("flagged");
+    this.innerHTML = "";
+    flaggedCount--;
+    if (mineField[parseInt(this.getAttribute("data-row"))][parseInt(this.getAttribute("data-col"))] === 1) {
+      mineCount++;
     }
   }
-  
-  function showAllMines() {
-    const cells = document.querySelectorAll("td");
-    for (const cell of cells) {
-      if (mineField[parseInt(cell.getAttribute("data-row"))][parseInt(cell.getAttribute("data-col"))] === 1) {
-        cell.classList.add("mined");
-      }
+  if (mineCount === 0 && flaggedCount === mineField.length * mineField[0].length) {
+    gameOver = true;
+    alert("You win!");
+  }
+}
+
+function showAllMines() {
+  const cells = document.querySelectorAll("td");
+  for (const cell of cells) {
+    if (mineField[parseInt(cell.getAttribute("data-row"))][parseInt(cell.getAttribute("data-col"))] === 1) {
+      cell.classList.add("mined");
     }
   }
+}
 
 function generateMineField(rows, cols, mines) {
+  for (var x = 1; x < document.querySelector("#board").rows.length; x++) {
+    document.querySelector("#board").deleteRow(x);
+  }
   mineCount = mines;
   for (let i = 0; i < rows; i++) {
     mineField[i] = [];
@@ -104,8 +117,8 @@ function generateMineField(rows, cols, mines) {
       mineField[row][col] = 1;
       mines--;
     }
-  } 
-  
+  }
+
   for (let k = 0; k < mineField.length; k++) {
     const tr = document.createElement("tr");
     for (let l = 0; l < mineField[k].length; l++) {
@@ -115,14 +128,16 @@ function generateMineField(rows, cols, mines) {
       td.style.height = "25px";
       td.setAttribute("data-row", k);
       td.setAttribute("data-col", l);
-      td.addEventListener("click", handleClick);
+      td.addEventListener("click", function (event) {
+        handleClick(event);
+      });
       td.addEventListener("contextmenu", handleRightClick);
       tr.appendChild(td);
     }
     document.querySelector("#board").appendChild(tr);
   }
-  
-  setInterval(function() {
+
+  setInterval(function () {
     if (!gameOver) {
       timer++;
       timerDisplay.innerHTML = timer;
