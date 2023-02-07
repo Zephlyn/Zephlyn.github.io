@@ -39,6 +39,8 @@ function spreadEmpty(row, col) {
 
 function handleClick(event) {
   if (event.button === 0) {
+    const row = parseInt(event.srcElement.getAttribute("data-row"));
+    const col = parseInt(event.srcElement.getAttribute("data-col"));
     if (gameOver || event.srcElement.classList.contains("flagged")) {
       return;
     }
