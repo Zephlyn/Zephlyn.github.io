@@ -4,11 +4,6 @@ window.addEventListener("load", function () {
     return;
   }
 
-  const timerDisplay = document.querySelector("#timer");
-  if (!timerDisplay) {
-    return;
-  }
-
   restartButton.addEventListener("click", function () {
     location.reload();
   });
@@ -91,15 +86,13 @@ function showAllMines() {
   const cells = document.querySelectorAll("td");
   for (const cell of cells) {
     if (mineField[parseInt(cell.getAttribute("data-row"))][parseInt(cell.getAttribute("data-col"))] === 1) {
-      cell.classList.add("mined");
+      cell.style.backgroundColor = colors[1];
+      cell.innerHTML = "X";
     }
   }
 }
 
 function generateMineField(rows, cols, mines) {
-  for (var x = 1; x < document.querySelector("#board").rows.length; x++) {
-    document.querySelector("#board").deleteRow(x);
-  }
   mineCount = mines;
   for (let i = 0; i < rows; i++) {
     mineField[i] = [];
@@ -137,7 +130,7 @@ function generateMineField(rows, cols, mines) {
   setInterval(function () {
     if (!gameOver) {
       timer++;
-      timerDisplay.innerHTML = timer;
+      document.querySelector("#timer").innerHTML = timer;
     }
   }, 1000);
 }
