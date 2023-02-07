@@ -32,8 +32,23 @@ function spreadEmpty(row, col) {
       }
     }
   } else {
-    table.rows[row + 1].cells[col].innerHTML = mineField[row][col];
-    table.rows[row + 1].cells[col].style.backgroundColor = colors[mineField[row][col]];
+    let _mines = 0;
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if (
+          row + i >= 0 &&
+          row + i < mineField.length &&
+          col + j >= 0 &&
+          col + j < mineField[row].length
+        ) {
+          if (mineField[row + i][col + j] === 1) {
+            _mines++;
+          }
+        }
+      }
+    }
+    table.rows[row + 1].cells[col].innerHTML = _mines;
+    table.rows[row + 1].cells[col].style.backgroundColor = colors[_mines];
   }
 }
 
@@ -61,6 +76,9 @@ function handleClick(event) {
       event.srcElement.innerHTML = "X";
       event.srcElement.style.backgroundColor = colors[1];
     } else {
+        if(mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
+            spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
+        }
         let _mines = 0;
         for (let i = -1; i <= 1; i++) {
           for (let j = -1; j <= 1; j++) {
