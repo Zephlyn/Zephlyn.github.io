@@ -48,9 +48,6 @@ function handleClick(event) {
       firstClick = false;
       let row = event.srcElement.parentElement.rowIndex - 1;
       let col = event.srcElement.cellIndex;
-      while (mineField[row][col] === 0) {
-        generateMineField(length, width, mines);
-      }
       spreadEmpty(row, col);
     } else if (mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex] === 0) {
       spreadEmpty(event.srcElement.parentElement.rowIndex - 1, event.srcElement.cellIndex);
@@ -144,4 +141,3 @@ function generateMineField(rows, cols, mines) {
     }
   }, 1000);
 }
-
