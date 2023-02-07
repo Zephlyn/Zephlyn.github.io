@@ -39,7 +39,7 @@ function spreadEmpty(row, col) {
 
 function handleClick(event) {
   if (event.button === 0) {
-    if (gameOver || this.classList.contains("flagged")) {
+    if (gameOver || event.srcElement.classList.contains("flagged")) {
       return;
     }
 
@@ -52,8 +52,8 @@ function handleClick(event) {
       spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
     } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 1) {
       gameOver = true;
-      this.innerHTML = "X";    
-      this.classList.add("mined");
+      event.srcElement.innerHTML = "X";    
+      event.srcElement.classList.add("mined");
       showAllMines();
       alert("Game Over!");      
       event.srcElement.innerHTML = "X";
