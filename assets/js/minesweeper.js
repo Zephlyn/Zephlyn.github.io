@@ -43,14 +43,14 @@ function handleClick(event) {
       return;
     }
 
-    if (firstClick) {
+    /*if (firstClick) {
       firstClick = false;
       let row = event.srcElement.parentElement.rowIndex;
       let col = event.srcElement.cellIndex;
       spreadEmpty(row, col);
     } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
       spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
-    } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 1) {
+    } else */if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 1) {
       gameOver = true;
       event.srcElement.innerHTML = "X";    
       event.srcElement.classList.add("mined");
