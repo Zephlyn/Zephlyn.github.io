@@ -41,14 +41,14 @@ function handleClick(event) {
   if (event.button === 0) {
     if (firstClick) {
       firstClick = false;
-      let row = event.srcElement.parentElement.rowIndex - 1;
+      let row = event.srcElement.parentElement.rowIndex;
       let col = event.srcElement.cellIndex;
       spreadEmpty(row, col);
-    } else if (mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex] === 0) {
-      spreadEmpty(event.srcElement.parentElement.rowIndex - 1, event.srcElement.cellIndex);
-    } else if (mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex] > 0) {
-      event.srcElement.innerHTML = mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex];
-      event.srcElement.style.backgroundColor = colors[mineField[event.srcElement.parentElement.rowIndex - 1][event.srcElement.cellIndex]];
+    } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
+      spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
+    } else if (mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] > 0) {
+      event.srcElement.innerHTML = mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex];
+      event.srcElement.style.backgroundColor = colors[mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex]];
     } else {
       event.srcElement.innerHTML = "X";
       event.srcElement.style.backgroundColor = colors[1];
