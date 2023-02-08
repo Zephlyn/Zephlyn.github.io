@@ -19,7 +19,7 @@ let firstClick = true;
 
 function spreadEmpty(row, col) {
     console.log("Spread empty");
-  if (row < 0 || row >= length || col < 0 || col >= width) {
+  if (row <= 0 || row > length || col <= 0 || col > width) {
     console.log("Invalid row");
     return;
   }
