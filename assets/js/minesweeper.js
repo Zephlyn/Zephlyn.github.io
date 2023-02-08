@@ -23,7 +23,7 @@ function spreadEmpty(row, col) {
     console.log("Invalid row");
     return;
   }
-  if (table.rows[row + 1].cells[col].innerHTML !== "") {
+  if (table.rows[row + 1].cells[col]?.innerHTML !== "") {
     console.log("Cell already clicked");
     return;
   }
@@ -51,24 +51,6 @@ function spreadEmpty(row, col) {
         spreadEmpty(row + i, col + j);
       }
     }
-  } else {
-    let _mines = 0;
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        if (
-          row + i >= 0 &&
-          row + i < mineField.length &&
-          col + j >= 0 &&
-          col + j < mineField[row].length
-        ) {
-          if (mineField[row + i][col + j] === 1) {
-            _mines++;
-          }
-        }
-      }
-    }
-    table.rows[row + 1].cells[col].innerHTML = _mines;
-    table.rows[row + 1].cells[col].style.backgroundColor = colors[_mines];
   }
 }
 
