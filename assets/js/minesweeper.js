@@ -18,14 +18,34 @@ let gameOver = false;
 let firstClick = true;
 
 function spreadEmpty(row, col) {
+    console.log("Spread empty");
   if (row < 0 || row >= length || col < 0 || col >= width) {
+    console.log("Invalid row");
     return;
   }
   if (table.rows[row + 1].cells[col].innerHTML !== "") {
+    console.log("Cell already clicked");
     return;
   }
   table.rows[row + 1].cells[col].style.backgroundColor = colors[0];
   if (mineField[row][col] === 0) {
+    let _mines = 0;
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if (
+          row + i >= 0 &&
+          row + i < mineField.length &&
+          col + j >= 0 &&
+          col + j < mineField[row].length
+        ) {
+          if (mineField[row + i][col + j] === 1) {
+            _mines++;
+          }
+        }
+      }
+    }
+    table.rows[row + 1].cells[col].innerHTML = _mines;
+    table.rows[row + 1].cells[col].style.backgroundColor = colors[_mines];
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         spreadEmpty(row + i, col + j);
