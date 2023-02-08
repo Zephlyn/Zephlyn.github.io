@@ -97,7 +97,7 @@ function handleClick(event) {
       event.srcElement.style.backgroundColor = colors[1];
     } else {
         if(mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
-            spreadEmpty(event.srcElement.parentElement.rowIndex, event.srcElement.cellIndex);
+            spreadEmpty(row, col);
         }
         let _mines = 0;
         for (let i = -1; i <= 1; i++) {
