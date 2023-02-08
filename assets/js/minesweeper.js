@@ -18,6 +18,7 @@ let gameOver = false;
 let firstClick = true;
 
 function spreadEmpty(row, col) {
+  let table = document.querySelector("#board");
   console.log("Spread empty");
   console.log(`Row: ${row}`);
   console.log(`Col: ${col}`);
