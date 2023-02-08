@@ -7,8 +7,6 @@ window.addEventListener("load", function () {
   restartButton.addEventListener("click", function () {
     location.reload();
   });
-
-  const _length = parseInt(document.getElementById("length").value);
 });
 
 const mineField = [];
@@ -24,9 +22,9 @@ function spreadEmpty(row, col) {
   console.log(`Row: ${row}`);
   console.log(`Col: ${col}`);
   console.log(`Value of mineField[row][col]: ${mineField[row][col]}`);
-  console.log(`Length: ${_length}`);
+  console.log(`Length: ${parseInt(document.getElementById("length").value)}`);
   console.log(`Width: ${width}`);
-  if (row < 0 || row >= _length || col < 0 || col >= width) {
+  if (row < 0 || row >= parseInt(document.getElementById("length").value) || col < 0 || col >= width) {
     console.log("Invalid row");
     return;
   }
