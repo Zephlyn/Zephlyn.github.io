@@ -27,6 +27,10 @@ function spreadEmpty(row, col) {
     console.log("Cell already clicked");
     return;
   }
+  if(mineField[row][col] > 0) {
+    console.log("cell is a mine");
+    return;
+  }
   table.rows[row + 1].cells[col].style.backgroundColor = colors[0];
   if (mineField[row][col] === 0) {
     let _mines = 0;
