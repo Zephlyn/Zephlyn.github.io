@@ -19,12 +19,6 @@ let firstClick = true;
 
 function spreadEmpty(row, col) {
   let table = document.querySelector("#board");
-  console.log("Spread empty");
-  console.log(`Row: ${row}`);
-  console.log(`Col: ${col}`);
-  console.log(`Value of mineField[row][col]: ${mineField[row][col]}`);
-  console.log(`Length: ${parseInt(document.getElementById("length").value)}`);
-  console.log(`Width: ${width}`);
   if (row < 0 || row >= parseInt(document.getElementById("length").value) || col < 0 || col >= width) {
     console.log("Invalid row");
     return;
@@ -102,9 +96,6 @@ function handleClick(event) {
       event.srcElement.innerHTML = "X";
       event.srcElement.style.backgroundColor = colors[1];
     } else {
-        if(mineField[event.srcElement.parentElement.rowIndex][event.srcElement.cellIndex] === 0) {
-            spreadEmpty(row, col);
-        }
         let _mines = 0;
         for (let i = -1; i <= 1; i++) {
           for (let j = -1; j <= 1; j++) {
@@ -122,6 +113,7 @@ function handleClick(event) {
         }
         event.srcElement.innerHTML = _mines;
         event.srcElement.style.backgroundColor = colors[_mines];
+        spreadEmpty(row, col);
     }
   }
 }
