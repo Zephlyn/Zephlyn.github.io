@@ -18,7 +18,12 @@ let gameOver = false;
 let firstClick = true;
 
 function spreadEmpty(row, col) {
-    console.log("Spread empty");
+  console.log("Spread empty");
+  console.log(`Row: ${row}`);
+  console.log(`Col: ${col}`);
+  console.log(`Value of mineField[row][col]: ${mineField[row][col]}`);
+  console.log(`Length: ${length}`);
+  console.log(`Width: ${width}`);
   if (row <= 0 || row > length || col <= 0 || col > width) {
     console.log("Invalid row");
     return;
