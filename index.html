@@ -76,8 +76,11 @@
         }
 
         .slash {
-            margin-left: 5px;
-            margin-right: 5px;
+            margin-left: 10px; /* Increase distance from the inversion */
+        }
+
+        .inversion {
+            margin-left: 5px; /* Slightly shift the inversion to the right */
         }
 
         button {
@@ -112,7 +115,7 @@
     
     <div class="harmony-box">
         <p id="key" class="harmony">Key: C Major</p>
-        <p id="chord" class="harmony roman-numeral">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span><span class="slash">/</span>IV</p>
+        <p id="chord" class="harmony roman-numeral">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span><span class="slash">/</span><span class="inversion">IV</span></p>
         <button onclick="generateHarmony()">Generate New Harmony</button>
     </div>
 
