@@ -43,9 +43,14 @@
             font-weight: bold;
             color: gold;
             position: relative;
-            display: inline-block;
+            display: block;
             opacity: 0;
             animation: fadeInScale 0.5s forwards;
+        }
+
+        .roman-numeral {
+            margin-top: 10px;
+            font-size: 35px;
         }
 
         .stacked {
@@ -53,11 +58,12 @@
             display: inline-block;
             width: 1em;
             text-align: center;
+            line-height: 1;
         }
 
         .stacked .sup {
             position: absolute;
-            top: -0.6em;
+            top: -0.5em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.6em;
@@ -65,7 +71,7 @@
 
         .stacked .sub {
             position: absolute;
-            bottom: -0.4em;
+            bottom: -0.2em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.6em;
@@ -81,11 +87,13 @@
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
+            display: block;
+            width: 100%;
         }
 
         button:hover {
             background-color: #FFD700;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .credits {
@@ -101,10 +109,9 @@
     
     <div class="harmony-box">
         <p id="key" class="harmony">Key: C Major</p>
-        <p id="chord" class="harmony">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span>/IV</p>
+        <p id="chord" class="harmony roman-numeral">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span>/IV</p>
+        <button onclick="generateHarmony()">Generate New Harmony</button>
     </div>
-
-    <button onclick="generateHarmony()">Generate New Harmony</button>
 
     <p class="credits">by Steve Luthye and Antoni Potera</p>
 
