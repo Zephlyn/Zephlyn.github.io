@@ -61,7 +61,7 @@
 
         .stacked .sup {
             position: absolute;
-            top: -1em;
+            top: -0.6em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.5em; /* Make smaller */
@@ -69,18 +69,18 @@
 
         .stacked .sub {
             position: absolute;
-            bottom: -1em;
+            bottom: -0.6em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.5em; /* Make smaller */
         }
 
         .slash {
-            margin-left: 20px; /* Increase distance from the inversion */
+            margin-left: 10px; /* Increase distance from the inversion */
         }
 
         .inversion {
-            margin-left: 15px; /* Slightly shift the inversion to the right */
+            margin-left: 5px; /* Slightly shift the inversion to the right */
         }
 
         button {
@@ -166,6 +166,14 @@
             setTimeout(() => {
                 keyElement.innerHTML = `Key: ${selectedKey.name}`;
                 chordElement.innerHTML = harmonyText;
+
+                // Reapply the correct margins to ensure spacing is consistent
+                const slashElement = chordElement.querySelector('.slash');
+                const inversionElement = chordElement.querySelector('.inversion');
+                
+                slashElement.style.marginLeft = '10px'; // Ensure correct spacing of slash
+                inversionElement.style.marginLeft = '5px'; // Ensure slight right shift of inversion
+
                 keyElement.style.animation = "fadeInScale 0.5s forwards";
                 chordElement.style.animation = "fadeInScale 0.5s forwards";
             }, 100);
