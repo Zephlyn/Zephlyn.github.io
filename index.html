@@ -1,64 +1,110 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary Harmony Generator</title>
     <style>
-      td {
-        background-color: lightgray;
-        text-align: center;
-        vertical-align: middle;
-      }
-      .flagged {
-        background-color: lightblue;
-      }
+        body {
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            background-color: #222;
+            color: white;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            color: gold;
+        }
+        .harmony-box {
+            background: black;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .harmony {
+            font-size: 40px;
+            font-weight: bold;
+            color: gold;
+        }
+        .stacked {
+            display: inline-block;
+            text-align: center;
+            line-height: 1;
+        }
+        .sup {
+            font-size: 0.6em;
+            vertical-align: top;
+        }
+        .sub {
+            font-size: 0.6em;
+            vertical-align: bottom;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: gold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FFD700;
+        }
     </style>
-    <title>Minesweeper</title>
-    <script src="/assets/js/minesweeper.js"></script> 
-  </head>
-
-  <body>
-    <div id="minesweeper">
-        <div id="header">
-          <span id="timer">0</span>
-          <button id="restart">Restart</button>
-        </div>
-        <table>
-            <tr>
-              <td>
-                Length:
-                <select id="length">
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                </select>
-              </td>
-              <td>
-                Width:
-                <select id="width">
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                </select>
-              </td>
-              <td>
-                Mines:
-                <input type="text" id="mines" value="10">
-              </td>
-              <td>
-                <button id="generateButton">Generate</button>
-              </td>
-            </tr>
-        </table>
-        <table id="board"></table>
-          <script>
-            const generateButton = document.getElementById("generateButton");
-            generateButton.addEventListener("click", function() {
-              const length = parseInt(document.getElementById("length").value);
-              const width = parseInt(document.getElementById("width").value);
-              const mines = parseInt(document.getElementById("mines").value);
-              generateMineField(length, width, mines);
-            });
-          </script>
+</head>
+<body>
+    <h1>Secondary Harmony Generator</h1>
+    
+    <div class="harmony-box">
+        <p id="key" class="harmony">Key: C Major</p>
+        <p id="chord" class="harmony">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span>/IV</p>
     </div>
+
+    <button onclick="generateHarmony()">Generate New Harmony</button>
+
+    <script>
+        const keys = [
+            { name: "C Major", accidentals: 0, weight: 5 }, { name: "G Major", accidentals: 1, weight: 5 },
+            { name: "D Major", accidentals: 2, weight: 5 }, { name: "A Major", accidentals: 3, weight: 3 },
+            { name: "E Major", accidentals: 4, weight: 3 }, { name: "B Major", accidentals: 5, weight: 3 }
+        ];
+
+        const majorNumerals = ["ii", "IV", "V", "vi"];
+        const minorNumerals = ["III", "iv", "V", "VI"];
+
+        const inversionOptions = {
+            "": "",
+            "6": "<span class='sup'>6</span>",
+            "7": "<span class='sup'>7</span>",
+            "65": "<span class='stacked'><span class='sup'>6</span><span class='sub'>5</span></span>",
+            "43": "<span class='stacked'><span class='sup'>4</span><span class='sub'>3</span></span>",
+            "42": "<span class='stacked'><span class='sup'>4</span><span class='sub'>2</span></span>"
+        };
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function generateHarmony() {
+            let selectedKey = getRandomElement(keys);
+            let romanNumerals = selectedKey.name.includes("Minor") ? minorNumerals : majorNumerals;
+            let selectedNumeral = getRandomElement(romanNumerals);
+
+            let isSecondaryLeadingTone = Math.random() < 0.33;
+            let secondaryHarmony = isSecondaryLeadingTone ? "vii°" : "V";
+
+            let inversionKey = getRandomElement(Object.keys(inversionOptions));
+            let inversion = inversionOptions[inversionKey];
+
+            let harmonyText = `${secondaryHarmony}${inversion}/${selectedNumeral}`;
+
+            document.getElementById("key").innerHTML = `Key: ${selectedKey.name}`;
+            document.getElementById("chord").innerHTML = harmonyText;
+        }
+    </script>
 </body>
+</html>
