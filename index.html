@@ -55,24 +55,29 @@
 
         .stacked {
             display: inline-block;
-            vertical-align: middle;
             position: relative;
+            vertical-align: middle;
         }
 
         .stacked .sup {
             position: absolute;
-            top: -0.5em;
+            top: -1em;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.6em;
+            font-size: 0.5em; /* Make smaller */
         }
 
         .stacked .sub {
             position: absolute;
-            bottom: -0.5em;
+            bottom: -1em;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.6em;
+            font-size: 0.5em; /* Make smaller */
+        }
+
+        .slash {
+            margin-left: 5px;
+            margin-right: 5px;
         }
 
         button {
@@ -107,7 +112,7 @@
     
     <div class="harmony-box">
         <p id="key" class="harmony">Key: C Major</p>
-        <p id="chord" class="harmony roman-numeral">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span>/IV</p>
+        <p id="chord" class="harmony roman-numeral">V<span class="stacked"><span class="sup">4</span><span class="sub">3</span></span><span class="slash">/</span>IV</p>
         <button onclick="generateHarmony()">Generate New Harmony</button>
     </div>
 
