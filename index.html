@@ -76,11 +76,11 @@
         }
 
         .slash {
-            margin-left: 15px; /* Increase distance from the inversion */
+            margin-left: 10px; /* Increase distance from the inversion */
         }
 
         .inversion {
-            margin-left: 10px; /* Slightly shift the inversion to the right */
+            margin-left: 13px; /* Slightly shift the inversion to the right */
         }
 
         button {
@@ -155,7 +155,7 @@
             let inversionKey = getRandomElement(Object.keys(inversionOptions));
             let inversion = inversionOptions[inversionKey];
 
-            let harmonyText = `${secondaryHarmony}${inversion}/${selectedNumeral}`;
+            let harmonyText = `${secondaryHarmony}${inversion} /${selectedNumeral}`;
 
             let keyElement = document.getElementById("key");
             let chordElement = document.getElementById("chord");
@@ -171,8 +171,8 @@
                 const slashElement = chordElement.querySelector('.slash');
                 const inversionElement = chordElement.querySelector('.inversion');
                 
-                slashElement.style.marginLeft = '15px'; // Ensure correct spacing of slash
-                inversionElement.style.marginLeft = '10px'; // Ensure slight right shift of inversion
+                slashElement.style.marginLeft = '10px'; // Ensure correct spacing of slash
+                inversionElement.style.marginLeft = '13px'; // Ensure slight right shift of inversion
 
                 keyElement.style.animation = "fadeInScale 0.5s forwards";
                 chordElement.style.animation = "fadeInScale 0.5s forwards";
