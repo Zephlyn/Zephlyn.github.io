@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondary Harmony Generator</title>
     <style>
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         body {
             font-family: 'Times New Roman', serif;
             text-align: center;
@@ -12,35 +23,54 @@
             color: white;
             padding: 20px;
         }
+
         h1 {
             font-size: 36px;
             color: gold;
         }
+
         .harmony-box {
             background: black;
             padding: 20px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
+            min-width: 300px;
         }
+
         .harmony {
             font-size: 40px;
             font-weight: bold;
             color: gold;
-        }
-        .stacked {
+            position: relative;
             display: inline-block;
+            opacity: 0;
+            animation: fadeInScale 0.5s forwards;
+        }
+
+        .stacked {
+            position: relative;
+            display: inline-block;
+            width: 1em;
             text-align: center;
-            line-height: 1;
         }
-        .sup {
+
+        .stacked .sup {
+            position: absolute;
+            top: -0.6em;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 0.6em;
-            vertical-align: top;
         }
-        .sub {
+
+        .stacked .sub {
+            position: absolute;
+            bottom: -0.4em;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 0.6em;
-            vertical-align: bottom;
         }
+
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -50,9 +80,19 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: transform 0.2s ease-in-out;
         }
+
         button:hover {
             background-color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .credits {
+            margin-top: 30px;
+            font-size: 14px;
+            color: gray;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -66,6 +106,8 @@
 
     <button onclick="generateHarmony()">Generate New Harmony</button>
 
+    <p class="credits">by Steve Luthye and Antoni Potera</p>
+
     <script>
         const keys = [
             { name: "C Major", accidentals: 0, weight: 5 }, { name: "G Major", accidentals: 1, weight: 5 },
@@ -78,8 +120,8 @@
 
         const inversionOptions = {
             "": "",
-            "6": "<span class='sup'>6</span>",
-            "7": "<span class='sup'>7</span>",
+            "6": "<span class='stacked'><span class='sup'>6</span></span>",
+            "7": "<span class='stacked'><span class='sup'>7</span></span>",
             "65": "<span class='stacked'><span class='sup'>6</span><span class='sub'>5</span></span>",
             "43": "<span class='stacked'><span class='sup'>4</span><span class='sub'>3</span></span>",
             "42": "<span class='stacked'><span class='sup'>4</span><span class='sub'>2</span></span>"
@@ -102,8 +144,18 @@
 
             let harmonyText = `${secondaryHarmony}${inversion}/${selectedNumeral}`;
 
-            document.getElementById("key").innerHTML = `Key: ${selectedKey.name}`;
-            document.getElementById("chord").innerHTML = harmonyText;
+            let keyElement = document.getElementById("key");
+            let chordElement = document.getElementById("chord");
+
+            keyElement.style.opacity = "0";
+            chordElement.style.opacity = "0";
+
+            setTimeout(() => {
+                keyElement.innerHTML = `Key: ${selectedKey.name}`;
+                chordElement.innerHTML = harmonyText;
+                keyElement.style.animation = "fadeInScale 0.5s forwards";
+                chordElement.style.animation = "fadeInScale 0.5s forwards";
+            }, 100);
         }
     </script>
 </body>
