@@ -61,7 +61,7 @@
 
         .stacked .sup {
             position: absolute;
-            top: -0.6em;
+            top: -1em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.5em; /* Make smaller */
@@ -69,7 +69,7 @@
 
         .stacked .sub {
             position: absolute;
-            bottom: -0.6em;
+            bottom: -1em;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.5em; /* Make smaller */
@@ -171,8 +171,8 @@
                 const slashElement = chordElement.querySelector('.slash');
                 const inversionElement = chordElement.querySelector('.inversion');
                 
-                slashElement.style.marginLeft = '10px'; // Ensure correct spacing of slash
-                inversionElement.style.marginLeft = '5px'; // Ensure slight right shift of inversion
+                slashElement.style.marginLeft = '15px'; // Ensure correct spacing of slash
+                inversionElement.style.marginLeft = '10px'; // Ensure slight right shift of inversion
 
                 keyElement.style.animation = "fadeInScale 0.5s forwards";
                 chordElement.style.animation = "fadeInScale 0.5s forwards";
