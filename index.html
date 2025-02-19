@@ -67,6 +67,13 @@
             font-size: 0.5em; /* Make smaller */
         }
 
+        .stacked .sups {
+            position: absolute;
+            top: -2em;
+            left: 50%;
+            font-size: 0.5em; /* Make smaller */
+        }
+
         .stacked .sub {
             position: absolute;
             bottom: -1em;
@@ -133,8 +140,8 @@
 
         const inversionOptions = {
             "": "",
-            "6": "<span class='stacked'><span class='sup'>6</span></span>",
-            "7": "<span class='stacked'><span class='sup'>7</span></span>",
+            "6": "<span class='stacked'><span class='sups'>6</span></span>",
+            "7": "<span class='stacked'><span class='sups'>7</span></span>",
             "65": "<span class='stacked'><span class='sup'>6</span><span class='sub'>5</span></span>",
             "43": "<span class='stacked'><span class='sup'>4</span><span class='sub'>3</span></span>",
             "42": "<span class='stacked'><span class='sup'>4</span><span class='sub'>2</span></span>"
@@ -174,7 +181,7 @@
                 slashElement.style.marginLeft = '10px'; // Ensure correct spacing of slash
                 
                 if(harmonyText.includes("vii")) {
-                    inversionElement.style.marginLeft = '17px'; // Ensure slight right shift of inversion
+                    inversionElement.style.marginLeft = '20px'; // Ensure slight right shift of inversion
                 } else {
                     inversionElement.style.marginLeft = '13px'; // Ensure slight right shift of inversion
                 }
